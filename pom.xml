@@ -77,6 +77,7 @@
         <configuration>
           <systemPropertyVariables>
             <browser>chrome</browser>
+            <selenium.grid.enabled>true</selenium.grid.enabled>
           </systemPropertyVariables>
           <suiteXmlFiles>
             <file>test-suite.xml</file>
