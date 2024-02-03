@@ -75,6 +75,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.version}</version>
         <configuration>
+<!--          mvn clean test -Dbrowser=chrome -Dselenium.grid.enabled=true-->
           <systemPropertyVariables>
             <browser>chrome</browser>
             <selenium.grid.enabled>true</selenium.grid.enabled>

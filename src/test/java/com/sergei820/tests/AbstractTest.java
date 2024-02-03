@@ -1,5 +1,6 @@
 package com.sergei820.tests;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.sergei820.util.Config;
 import com.sergei820.util.Constants;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -11,18 +12,22 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 public abstract class AbstractTest {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractTest.class);
 
     protected WebDriver driver;
+
+    @BeforeSuite
+    public void setupConfig() {
+        Config.initialize();
+    }
 
     @BeforeTest
     @Parameters({"browser"})
@@ -49,10 +54,14 @@ public abstract class AbstractTest {
         return new ChromeDriver();
     }
 
-
     @AfterTest
     public void quitDriver() {
         this.driver.quit();
     }
 
+    // To check the possibility to observe execution in browser in docker containers
+//    @AfterMethod()
+//    public void sleep() {
+//        Uninterruptibles.sleepUninterruptibly(Duration.ofSeconds(5));
+//    }
 }
